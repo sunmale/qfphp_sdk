@@ -19,9 +19,17 @@ class MailConfig
     );
 
 
-    //得到需要的配置信息，封装成一个数组返回
-    public static  function  getConfig(){
+    /**得到需要的配置信息，封装成一个数组返回
+     * @param null $options  //自定配置参数
+     * @return array
+     */
+    public static  function  getConfig($options=null){
+        if(!empty($options)){
+            self::$_config = array_merge(self::$_config,$options);
+        }
         return self::$_config;
     }
+
+
 
 }
