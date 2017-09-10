@@ -3,15 +3,46 @@
 namespace  Qf;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use Qf\Config\MailConfig;
 
 class Mail{
-    //发送邮件
+
+    //邮件发送基本配置
+    private static $_config = array(
+        'qq'=>[
+            'email_host'             => '',          // smtp
+            'email_account'         => '',    // 邮箱账号
+            'email_password'         => '',   // 密码  注意: 163和QQ邮箱是授权码；不是登录的密码
+            'email_secure'      => '',                    // 链接方式 如果使用QQ邮箱；需要把此项改为  ssl
+            'email_port'             => '',              // 端口 如果使用QQ邮箱；需要把此项改为  465
+            'email_username'        => '',             // 发件人
+        ]
+    );
+
+    /**初始化邮件配置
+     * @param null $options  自定义的邮件发送参数
+     * @return mixed
+     */
+    public static  function  init($options=null)
+    {
+        if(!empty($options)){
+            self::$_config = array_merge(self::$_config,$options);
+        }
+        return self::class;
+    }
+
+
+    /**
+     * 邮件发送功能
+     * @param $user   //收件人的信息 （email,name）两个字段
+     * @param $data      //邮件内容 (title,html)两个字段
+     * @param string $type //邮件发送的方式  默认是qq邮箱发送
+     * @return bool
+     */
     public  static function   sendMail($user,$data,$type='qq')
     {
         try {
             $mail = new PHPMailer(true);
-            $config = MailConfig::getConfig()[$type];
+            $config = self::$_config[$type];
             //Server settings
             $mail->SMTPDebug = 0;                                 // Enable verbose debug output  开启调试模式 （默认 0 表示关闭调试模式）
             $mail->isSMTP();                                       // Set mailer to use SMTP   启用SMTP
@@ -45,27 +76,6 @@ class Mail{
     }
 
 
-
-
-    //初始化邮件配置
-    public static  function  init()
-    {
-
-
-    }
-
-
-
-    /**
-     * 自定义html模板
-     * @param $data
-     * @return string
-     */
-    public  static function  selfDefineHtml($data){
-
-        return $data;
-
-    }
 
 }
 
