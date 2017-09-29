@@ -1,7 +1,9 @@
 <?php
-namespace Qf;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+
+namespace qf;
+use qf\mail\PHPMailer;
+use qf\mail\Exception;
+
 class Mail
 {
     //当前类对象
@@ -9,12 +11,12 @@ class Mail
     //邮件发送基本配置
     private $_config = array(
         'qq' => [
-            'email_host' => '',          // smtp
-            'email_account' => '',    // 邮箱账号
-            'email_password' => '',   // 密码  注意: 163和QQ邮箱是授权码；不是登录的密码
-            'email_secure' => '',                    // 链接方式 如果使用QQ邮箱；需要把此项改为  ssl
-            'email_port' => '',              // 端口 如果使用QQ邮箱；需要把此项改为  465
-            'email_username' => '',             // 发件人
+            'email_host'             => 'smtp.qq.com',          // smtp
+            'email_account'         => '1982127547@qq.com',    // 邮箱账号
+            'email_password'         => 'yqwqqcvhkutbccde',   // 密码  注意: 163和QQ邮箱是授权码；不是登录的密码
+            'email_secure'      => 'ssl',                    // 链接方式 如果使用QQ邮箱；需要把此项改为  ssl
+            'email_port'             => '465',              // 端口 如果使用QQ邮箱；需要把此项改为  465
+            'email_username'        => '晴枫博客',             // 发件人
         ]
     );
     /**初始化邮件配置(用于自定义邮件参数)
