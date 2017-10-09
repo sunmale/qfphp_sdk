@@ -35,6 +35,7 @@ class Qq   {
     private static  $getUserInfoURL = 'https://graph.qq.com/user/get_user_info';
 
 
+
     /**
      * 通过qq快速登录获取用户信息
      * @param $code
@@ -48,7 +49,9 @@ class Qq   {
          $res = json_decode(trim(substr($res_json, 9), " );\n"), true);
          $user_info_url =  self::$getUserInfoURL."?access_token=$token_array[access_token]&oauth_consumer_key=$data[appid]&openid=$res[openid]";
          $user_info_json  =  self::https_request($user_info_url);
-         return  json_decode($user_info_json,true);
+         $user_info =   json_decode($user_info_json,true);
+         $user_info['openid'] = $res['openid'];
+         return $user_info;
      }
 
 
