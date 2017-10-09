@@ -52,6 +52,7 @@ class Qq   {
          $user_info =   json_decode($user_info_json,true);
          $user_info['openid'] = $res['openid'];
          return $user_info;
+
      }
 
 
