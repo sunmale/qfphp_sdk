@@ -29,6 +29,13 @@ class Qq   {
 
 
     /**
+     * 得到user_info接口的信息
+     * @var string
+     */
+    private static  $getUserInfoURL = 'https://graph.qq.com/user/get_user_info';
+
+
+    /**
      * 通过qq快速登录获取用户信息
      * @param $code
      * @param $data
@@ -38,8 +45,10 @@ class Qq   {
          $token_array =  self::getAccessToken($code,$data);
          $user_url =  self::$getOpenIdURL."?access_token=$token_array[access_token]";
          $res_json  =  self::https_request($user_url);
-         $data = json_decode(trim(substr($res_json, 9), " );\n"), true);
-         return $data;
+         $res = json_decode(trim(substr($res_json, 9), " );\n"), true);
+         $user_info_url =  self::$getUserInfoURL."?access_token=$token_array[access_token]&oauth_consumer_key=$data[appid]&openid=$res[openid]";
+         $user_info_json  =  self::https_request($user_info_url);
+         return  json_decode($user_info_json,true);
      }
 
 

@@ -12,9 +12,9 @@ class Oauth
     //邮件发送基本配置
     private $_config = array(
         'qq' => [
-            'appid'=>'101372250',
-            'secret'=>'df0f1d7acb6eb29e8722f81acc7c1e27',
-            'callback_url'=>'http://www.sunmale.cn'
+            'appid'=>'',
+            'secret'=>'',
+            'callback_url'=>''
         ]
     );
 
