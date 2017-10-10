@@ -64,7 +64,7 @@ class Qq   {
      */
      public static function  getAccessToken($code,$data){
          //保存文件路径
-         $path = __DIR__ . DIRECTORY_SEPARATOR .'assert'.DIRECTORY_SEPARATOR .'data';
+         $path =  dirname(dirname(__FILE__)) .'assert'.DIRECTORY_SEPARATOR .'data';
          if(!is_dir($path)){
              mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
          }
