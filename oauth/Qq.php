@@ -4,7 +4,6 @@
 namespace  qf\oauth;
 
 class Qq   {
-
     /**
      * 获取requestCode的api接口
      * @var string
@@ -16,24 +15,15 @@ class Qq   {
      */
     private  static $GetAccessTokenURL = 'https://graph.qq.com/oauth2.0/token';
     /**
-     * 获取request_code的额外参数,可在配置中修改 URL查询字符串格式
-     * @var srting
-     */
-    private  static $Authorize = 'scope=get_user_info,add_share';
-
-    /**
      * 获取用户授权的openid
      * @var string
      */
     private  static $getOpenIdURL = 'https://graph.qq.com/oauth2.0/me';
-
-
     /**
      * 得到user_info接口的信息
      * @var string
      */
     private static  $getUserInfoURL = 'https://graph.qq.com/user/get_user_info';
-
 
 
     /**
@@ -64,7 +54,7 @@ class Qq   {
      */
      public static function  getAccessToken($code,$data){
          //保存文件路径
-         $path =  dirname(dirname(__FILE__)) .'assert'.DIRECTORY_SEPARATOR .'data';
+         $path =  dirname(dirname(__FILE__)) .DIRECTORY_SEPARATOR .'assert'.DIRECTORY_SEPARATOR .'data';
          if(!is_dir($path)){
              mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
          }
