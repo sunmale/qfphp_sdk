@@ -53,43 +53,14 @@ class Qq   {
      * @throws \Exception
      */
      public static function  getAccessToken($code,$data){
-         //保存文件路径
-         $path =  dirname(dirname(__FILE__)) .DIRECTORY_SEPARATOR .'assert'.DIRECTORY_SEPARATOR .'data';
-         if(!is_dir($path)){
-             mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
-         }
-         //文件名称
-         $access_token_file =$path .DIRECTORY_SEPARATOR . 'access_token.json';
-         if(!is_file($access_token_file)){
-             self::set_php_file($access_token_file,"");
-         }
-         $res_data = json_decode(self::get_php_file($access_token_file));
-         if (empty($res_data) || $res_data->expires_in < time()) {
-             $url =  self::$GetAccessTokenURL."?grant_type=authorization_code&client_id=$data[appid]&client_secret=$data[secret]&code=$code&redirect_uri=$data[callback_url]";
-             $token_json  =  self::https_request($url);
-             parse_str($token_json, $res);
-             if(isset($res['errcode'])){
-                 throw new \Exception('获取access_toke出现错误');
-                 // return $res;
-             }
-             $access_token = $res['access_token'];
-             if ($access_token) {
-                 $content = new \stdClass();
-                 $content->access_token = $access_token;
-                 $content->expires_in = time() + $res['expires_in'];
-                 self::set_php_file($access_token_file,json_encode($content));
-             }
-         } else {
-             $access_token = $res_data->access_token;
-         }
-         return $access_token;
-     /*    $token_json  =  self::https_request($url);
+         $url =  self::$GetAccessTokenURL."?grant_type=authorization_code&client_id=$data[appid]&client_secret=$data[secret]&code=$code&redirect_uri=$data[callback_url]";
+          $token_json  =  self::https_request($url);
          parse_str($token_json, $token_array);
          if ($token_array['access_token'] && $token_array['expires_in']) {
-             return $token_array;
+             return $token_array['access_token'];
          }else{
              throw  new \Exception('qq快捷登录获取accessToken失败');
-         }*/
+         }
      }
 
 
