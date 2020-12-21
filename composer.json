@@ -1,0 +1,21 @@
+{
+    "name": "sunmale/fm",
+    "description": "farme merge for manger system",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "sunmale",
+            "email": "sunmale.cn@gmail.com"
+        }
+    ],
+    "require": {
+      
+    },
+    "autoload": {
+        "psr-4": {
+            "sunmale\\fm\\": "src"
+        }
+    },
+   
+    "minimum-stability": "dev"
+}
